@@ -1,9 +1,7 @@
 import React from "react";
 
-class BowlingScoreRoll extends React.Component {
-  render() {
-    return <div className="roll" />;
-  }
+function BowlingScoreRoll(props) {
+  return <div className="roll">{props.score}</div>;
 }
 
 export default BowlingScoreRoll;
