@@ -15,7 +15,7 @@ class BowlingGame {
     this.initFrames();
   }
 
-  reset(){
+  reset() {
     this.frames = [];
     this.rolls = [];
     this.frameIndex = 0;
@@ -32,16 +32,19 @@ class BowlingGame {
   }
 
   shot() {
-    const frame = this.frames[this.frameIndex].isFinished()
+    const isframeFinished = this.frames[this.frameIndex].isFinished();
+    const frame = isframeFinished
       ? this.frames[++this.frameIndex]
       : this.frames[this.frameIndex];
 
     this.rolls.push(frame.score());
 
+    //TODO run engine score on every frame, return totals for every frame or if it's pending
+
     if (this.frameIndex === MAX_FRAMES - 1 && frame.isFinished()) {
       this.isRunning = false;
     }
-    this.onShot(this, this.engine.score());
+    this.onShot(this);
   }
 
   play() {

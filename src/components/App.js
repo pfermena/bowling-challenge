@@ -38,7 +38,7 @@ class App extends Component {
     this.state.game.play();
   }
 
-  handleScore(game, score) {
+  handleScore(game) {
     this.setState({ game });
   }
 }

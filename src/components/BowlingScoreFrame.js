@@ -6,7 +6,7 @@ function BowlingScoreFrame(props) {
     <React.Fragment>
       <div className="row">{renderRolls(props)}</div>
       <div className="row">
-        <div className="column">{props.total}</div>
+        <div className="column roll">total</div>
       </div>
     </React.Fragment>
   );

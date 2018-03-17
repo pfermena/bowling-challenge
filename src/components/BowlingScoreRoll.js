@@ -5,8 +5,15 @@ function BowlingScoreRoll(props) {
 }
 
 function renderScore(props) {
-  if (props.index in props) {
-    return props[props.index];
+  const i = props.index;
+
+  if (i in props) {
+    if (i === 0 && props[i] === 10) {
+      return "X";
+    } else if (i === 1 && props[i] + props[i - 1] === 10) {
+      return "/";
+    }
+    return props[i] || "-";
   }
 }
 
