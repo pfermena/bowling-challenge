@@ -4,7 +4,7 @@ describe("Bowling Engine", () => {
   let engine;
 
   beforeEach(() => {
-    engine = new BowlingEngine();
+    engine = new BowlingEngine([]);
   });
 
   it("Gutter game", () => {

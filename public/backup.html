@@ -38,25 +38,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <style>
-    .roll,
-    .total {
-      position: relative;
-      box-sizing: border-box;
-      min-height: 3rem;
-      margin-bottom: 0;
-      border: 1px solid #007FFF;
-      border-radius: 2px;
-      overflow: hidden;
-      text-align: center;
-    }
-
-    .play,
-    .start {
-      color: #007FFF !important;
-      border-color: #007FFF !important;
-    }
-  </style>
   <div class="container">
     <div class="board row">
       <div class="frame column">
@@ -218,7 +199,7 @@
   <button class="button button-outline start">Start</button>
   <button class="button button-outline play">Play</button>
 
-  <!-- <script>
+  <script>
     "use strict"
 
     const boardElement = document.querySelector(".board")
@@ -340,10 +321,6 @@
         }
     }
 
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min
-    }
-
     class Bonus {
       constructor(frameIndex, rollIndex, type) {
         this.frameIndex = frameIndex
@@ -360,67 +337,7 @@
         return this.type === STRIKE_TYPE
       }
     }
-
-    class Frame {
-      constructor() {
-        this.rolls = []
-        this.numberOfRolls = 2
-        this.currentRoll = 0
-        this.bonus = {}
-      }
-
-      isFinished() {
-        return this.currentRoll === this.numberOfRolls - 1 || this.isStrike()
-      }
-
-      getRoll() {
-        return this.rolls[this.currentRoll]
-      }
-
-      getScore(rollIndex) {
-        return this.rolls[rollIndex]
-      }
-
-      getTotal() {
-        return this.rolls.reduce((sum, value) => sum + value, 0)
-      }
-
-      isStrike() {
-        return this.getScore(0) === 10
-      }
-
-      isSpare() {
-        return this.getScore(0) + this.getScore(1) === 10
-      }
-
-      getMissingPins() {
-        return MAX_PINS - this.getScore(0)
-      }
-
-      calculateBonus(rollIndex) {
-        if (this.isStrike()) {
-          this.bonus = new Bonus(currentFrame, rollIndex, STRIKE_TYPE)
-
-        } else if (this.isSpare()) {
-          this.bonus = new Bonus(currentFrame, rollIndex, SPARE_TYPE)
-        }
-      }
-    }
-
-    class LastFrame extends Frame {
-      constructor() {
-        super()
-
-        this.numberOfRolls = 3
-      }
-
-      isFinished() {
-        console.log(super.numberOfRolls)
-        return this.currentRoll === super.numberOfRolls - 1 && (!this.isStrike() || !this.isSpare()) ||
-          this.currentRoll === this.numberOfRolls - 1
-      }
-    }
-  </script> -->
+  </script>
 </body>
 
 </html>

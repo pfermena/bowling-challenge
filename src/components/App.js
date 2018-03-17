@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import BowlingScoreBoard from "./BowlingScoreBoard";
+import BowlingGame from "../services/BowlingGame";
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      game: new BowlingGame(this.handleScore.bind(this))
+    };
+  }
   render() {
     return (
       <div className="container">
@@ -13,18 +21,25 @@ class App extends Component {
         <div className="row">
           <div className="container">
             <div className="row">
-              <BowlingScoreBoard />
+              <BowlingScoreBoard {...this.state.game} />
             </div>
           </div>
         </div>
         <div className="row">
           <div className="column">
             <button onClick={() => this.handlePlay()}>Play</button>
-            <button onClick={() => this.handleRoll()}>Roll</button>
           </div>
         </div>
       </div>
     );
+  }
+
+  handlePlay() {
+    this.state.game.play();
+  }
+
+  handleScore(game, score) {
+    this.setState({ game });
   }
 }
 

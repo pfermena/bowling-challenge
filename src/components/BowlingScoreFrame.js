@@ -4,7 +4,7 @@ import BowlingScoreRoll from "./BowlingScoreRoll";
 function BowlingScoreFrame(props) {
   return (
     <React.Fragment>
-      <div className="row">{renderRolls(props.numberOfRolls)}</div>
+      <div className="row">{renderRolls(props)}</div>
       <div className="row">
         <div className="column">{props.total}</div>
       </div>
@@ -12,20 +12,20 @@ function BowlingScoreFrame(props) {
   );
 }
 
-function renderRolls(numberOfRolls){
+function renderRolls(props){
   const rolls = [];
 
-  for (let i = 0; i < 2; i++) {
-    rolls.push(renderRoll(i));
+  for (let i = 0; i < props.numberOfRolls; i++) {
+    rolls.push(renderRoll(i, props));
   }
 
   return rolls;
 }
 
-function renderRoll(i) {
+function renderRoll(i, props) {
   return (
     <div className="column">
-      <BowlingScoreRoll key={i} />
+      <BowlingScoreRoll index={i} {...props.rolls} key={i} />
     </div>
   );
 }

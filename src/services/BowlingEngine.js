@@ -1,25 +1,22 @@
 class BowlingEngine {
-  constructor() {
-    this.rolls = [];
-    this.rollIndex = 0;
+  constructor(rolls) {
+    this.rolls = rolls;
   }
 
   roll(pins) {
-    this.rolls[this.rollIndex] = pins;
-
-    this.rollIndex++;
+    this.rolls.push(pins);
   }
 
-  score(start = 0, end = 10) {
+  score() {
     let totalScore = 0;
     let frameStart = 0;
 
-    for (let frame = start; frame < end; frame++) {
+    for (let frame = 0; frame < 10; frame++) {
       if (this._isStrike(frameStart)) {
-        totalScore += 10 + this._getStrikeScore(frameStart);
+        totalScore += this._getStrikeScore(frameStart);
         frameStart++;
       } else if (this._isSpare(frameStart)) {
-        totalScore += 10 + this._getSpareScore(frameStart);
+        totalScore += this._getSpareScore(frameStart);
         frameStart += 2;
       } else {
         totalScore += this._getFrameScore(frameStart);
@@ -48,7 +45,7 @@ class BowlingEngine {
       } else {
         frames.push(this.rolls[frameStart]);
         frames.push(this.rolls[frameStart]);
-        
+
         frameStart += 2;
       }
     }
@@ -64,11 +61,11 @@ class BowlingEngine {
   }
 
   _getStrikeScore(i) {
-    return this.rolls[i + 1] + this.rolls[i + 2];
+    return 10 + this.rolls[i + 1] + this.rolls[i + 2];
   }
 
   _getSpareScore(i) {
-    return this.rolls[i + 2];
+    return 10 + this.rolls[i + 2];
   }
 
   _getFrameScore(i) {
