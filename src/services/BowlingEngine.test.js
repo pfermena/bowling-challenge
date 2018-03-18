@@ -8,52 +8,60 @@ describe("Bowling Engine", () => {
   });
 
   it("Gutter game", () => {
-    playRolls(20, 0);
-
-    expect(engine.score()).toBe(0);
+    expect(scoreGame(20, 0)).toBe(0);
   });
 
   it("Perfect game", () => {
-    playRolls(12, 10);
-
-    expect(engine.score()).toBe(300);
+    expect(scoreGame(12, 10)).toBe(300);
   });
 
   it("All ones", () => {
-    playRolls(20, 1);
-
-    expect(engine.score()).toBe(20);
+    expect(scoreGame(20, 1)).toBe(20);
   });
 
   it("A spare", () => {
-    rollASpare();
-    engine.roll(3);
-    playRolls(17, 0);
-
-    expect(engine.score()).toBe(16);
+    expect(scoreRolls(rollASpare(), 10)).toBe(16);
   });
 
   it("A strike", () => {
-    rollAStrike();
-    engine.roll(3);
-    engine.roll(4);
-    playRolls(16, 0);
-
-    expect(engine.score()).toBe(24);
+    expect(scoreRolls(rollAStrike(), 10)).toBe(24);
   });
 
-  function playRolls(rolls, pins) {
-    for (let i = 0; i < rolls; i++) {
-      engine.roll(pins);
+  it("A partial game (complete frames)", () => {
+    expect(score(4, 1, 2)).toBe(4);
+  });
+
+  function playRolls(shots, pins) {
+    const rolls = [];
+
+    for (let i = 0; i < shots; i++) {
+      rolls.push(pins);
     }
+
+    return rolls;
   }
 
   function rollASpare() {
-    engine.roll(5);
-    engine.roll(5);
+    return [5, 5, 3].concat(playRolls(17, 0));
   }
 
   function rollAStrike() {
-    engine.roll(10);
+    return [10, 3, 4].concat(playRolls(16, 0));
+  }
+
+  function score(shots, pins, numberOfFrames) {
+    const rolls = playRolls(shots, pins);
+
+    return scoreRolls(rolls, numberOfFrames);
+  }
+
+  function scoreGame(shots, pins) {
+    return score(shots, pins, 10);
+  }
+
+  function scoreRolls(rolls, numberOfFrames) {
+    const frames = engine.score(rolls, numberOfFrames);
+
+    return frames[frames.length - 1];
   }
 });

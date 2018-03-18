@@ -4,15 +4,11 @@ import LastFrame from "./LastFrame";
 
 class BowlingGame {
   constructor(onShot) {
-    this.frames = [];
-    this.rolls = [];
-    this.isRunning = true;
-    this.engine = new BowlingEngine(this.rolls);
+    this.engine = new BowlingEngine();
     this.onShot = onShot;
     this.numberOfFrames = MAX_FRAMES;
-    this.frameIndex = 0;
 
-    this.initFrames();
+    this.reset();
   }
 
   reset() {
@@ -32,19 +28,28 @@ class BowlingGame {
   }
 
   shot() {
-    const isframeFinished = this.frames[this.frameIndex].isFinished();
-    const frame = isframeFinished
+    const frame = this.frames[this.frameIndex].isFinished()
       ? this.frames[++this.frameIndex]
       : this.frames[this.frameIndex];
 
     this.rolls.push(frame.score());
+    const frames = this.engine.score(
+      this.rolls,
+      this.frames.filter(f => f.isFinished()).length
+    );
 
-    //TODO run engine score on every frame, return totals for every frame or if it's pending
+    this.updateTotals(frames);
+    this.onShot(this);
 
-    if (this.frameIndex === MAX_FRAMES - 1 && frame.isFinished()) {
+    if (frame.isFinished() && this.frameIndex === MAX_FRAMES - 1) {
       this.isRunning = false;
     }
-    this.onShot(this);
+  }
+
+  updateTotals(frames) {
+    frames.forEach((score, i) => {
+      this.frames[i].setTotalScore(score);
+    });
   }
 
   play() {
@@ -55,7 +60,7 @@ class BowlingGame {
         return this.shot();
       }
       clearInterval(intervalId);
-    }, 100);
+    }, 300);
   }
 }
 

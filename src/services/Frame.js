@@ -4,6 +4,8 @@ class Frame {
   constructor() {
     this.rolls = [];
     this.numberOfRolls = 2;
+    this.isTotalScorePending = true;
+    this.totalScore = 0;
   }
 
   isFinished() {
@@ -31,6 +33,11 @@ class Frame {
     this.rolls.push(pins);
 
     return pins;
+  }
+
+  setTotalScore(totalScore){
+    this.isTotalScorePending = false;
+    this.totalScore = totalScore;
   }
 }
 

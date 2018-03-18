@@ -6,7 +6,7 @@ function BowlingScoreFrame(props) {
     <React.Fragment>
       <div className="row">{renderRolls(props)}</div>
       <div className="row">
-        <div className="column roll">total</div>
+        <div className="column roll">{getTotalScore(props)}</div>
       </div>
     </React.Fragment>
   );
@@ -28,6 +28,10 @@ function renderRoll(i, props) {
       <BowlingScoreRoll index={i} {...props.rolls} key={i} />
     </div>
   );
+}
+
+function getTotalScore(props){
+  return props.isTotalScorePending ? "" : props.totalScore;
 }
 
 export default BowlingScoreFrame;

@@ -27,7 +27,7 @@ class App extends Component {
         </div>
         <div className="row">
           <div className="column">
-            <button onClick={() => this.handlePlay()}>Play</button>
+            <button onClick={() => this.handlePlay()}>Auto Play</button>
           </div>
         </div>
       </div>
