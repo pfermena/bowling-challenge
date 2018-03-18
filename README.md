@@ -61,6 +61,13 @@ Minimum (keep in mind the optional requirements):
 
 I've created a simple score board that serves as layout of the scoring, it's really simple but there you can identify properly what happened with the game.
 
+There are two different options to run the game. 
+- Autoplay, you see how the game progresses.
+- Manual mode, you roll the ball each time
+
+Something I'd wanted to include is a visualization of how many and which pins are hit on every roll.
+
+
 #
 
 Bonus:
@@ -69,7 +76,7 @@ Bonus:
 * The player gets additional rolls in the last frame: one additional for a spare after the second roll or two extra rolls for a strike.
 
 - [x] Create a method that randomly throws a roll (one roll is 1-10 pins knocked down), and progresses the scoring.
-- [] Support multiple players.
+- [x] Support multiple players.
 
 ## Comments
 
