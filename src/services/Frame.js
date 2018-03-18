@@ -29,10 +29,14 @@ class Frame {
   }
 
   score() {
-    const pins = getRandomInt(0, MAX_PINS - this.getTotal());
+    const pins = getRandomInt(0, MAX_PINS - this.getPinsDown());
     this.rolls.push(pins);
 
     return pins;
+  }
+
+  getPinsDown() {
+    return this.getTotal();
   }
 
   setTotalScore(totalScore){

@@ -1,19 +1,33 @@
 import React from "react";
 
 function BowlingScoreRoll(props) {
-  return <div className="roll">{renderScore(props)}</div>;
+  return <div className="box">{renderScore(props)}</div>;
 }
 
 function renderScore(props) {
   const i = props.index;
+  const rolls = props.rolls;
 
-  if (i in props) {
-    if (i === 0 && props[i] === 10) {
-      return "X";
-    } else if (i === 1 && props[i] + props[i - 1] === 10) {
-      return "/";
+  if (i in rolls) {
+    if (i === 0) {
+      if (rolls[i] === 10) {
+        return <div className="animated shake">X</div>;
+      }
     }
-    return props[i] || "-";
+    if (i === 1) {
+      if (rolls[i] > 0 && rolls[i] + rolls[i - 1] === 10) {
+        return <div className="animated tada">/</div>;
+      }
+    }
+    if (i === 1 || i === 2) {
+      if (rolls[i - 1] === 10 && rolls[i] === 10) {
+        return <div className="animated shake">X</div>;
+      }
+    }
+    if (rolls[i] === 0) {
+      return <div className="animated flash">-</div>;
+    }
+    return rolls[i];
   }
 }
 

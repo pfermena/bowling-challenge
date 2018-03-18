@@ -52,6 +52,15 @@ class BowlingGame {
     });
   }
 
+  roll() {
+    if (this.isRunning) {
+      this.shot();
+    } else {
+      this.reset();
+      this.onShot(this);
+    }
+  }
+
   play() {
     this.reset();
 
@@ -60,7 +69,8 @@ class BowlingGame {
         return this.shot();
       }
       clearInterval(intervalId);
-    }, 300);
+      this.onShot(this);
+    }, 200);
   }
 }
 

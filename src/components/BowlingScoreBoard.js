@@ -17,7 +17,7 @@ function renderFrames(props) {
 
 function renderFrame(i, props) {
   return (
-    <div className="column">
+    <div className="col-xs">
       <BowlingScoreFrame {...props.frames[i]} key={i} />
     </div>
   );

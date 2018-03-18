@@ -6,13 +6,15 @@ function BowlingScoreFrame(props) {
     <React.Fragment>
       <div className="row">{renderRolls(props)}</div>
       <div className="row">
-        <div className="column roll">{getTotalScore(props)}</div>
+        <div className="col-xs">
+          <div className="box">{getTotalScore(props)}</div>
+        </div>
       </div>
     </React.Fragment>
   );
 }
 
-function renderRolls(props){
+function renderRolls(props) {
   const rolls = [];
 
   for (let i = 0; i < props.numberOfRolls; i++) {
@@ -24,13 +26,13 @@ function renderRolls(props){
 
 function renderRoll(i, props) {
   return (
-    <div className="column">
-      <BowlingScoreRoll index={i} {...props.rolls} key={i} />
+    <div className="col-xs">
+      <BowlingScoreRoll index={i} {...props} key={i} />
     </div>
   );
 }
 
-function getTotalScore(props){
+function getTotalScore(props) {
   return props.isTotalScorePending ? "" : props.totalScore;
 }
 
